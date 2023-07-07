@@ -1,26 +1,25 @@
-name: Deploy to Server
-
 on:
   push:
     branches:
       - main
-
+  workflow_dispatch:
+  
 jobs:
-  deploy:
+  run_pull:
+    name: run pull
     runs-on: ubuntu-latest
-
+    
     steps:
-    - name: Setup known_hosts
+    - name: install ssh keys
+      # check this thread to understand why its needed:
+      # https://stackoverflow.com/a/70447517
       run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-        chmod 600 ~/.ssh/known_hosts
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+    - name: connect and pull
+      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
+    - name: cleanup
 
-    - name: Checkout code
-      uses: actions/checkout@v2
 
-    - name: Deploy to Server
-      run: |
-        rsync -r --delete-after --quiet ${{ github.workspace }} sensai@45.136.71.121:/var/www/html
-      env:
-        DEPLOY_KEY: ${{ secrets.SENSEI_SSH }}
+      run: rm -rf ~/.ssh
