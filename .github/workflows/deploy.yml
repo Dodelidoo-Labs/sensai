@@ -23,4 +23,4 @@ jobs:
       run: |
         rsync -r --delete-after --quiet ${{ github.workspace }} sensai@45.136.71.121:/var/www/html
       env:
-        DEPLOY_KEY: ${{ secrets.sensai_ssh }}
+        DEPLOY_KEY: ${{ secrets.SENSEI_SSH }}
