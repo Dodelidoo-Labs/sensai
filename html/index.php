@@ -1,52 +1,46 @@
-HTML:
-```html
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #header {
+      background-color: red;
+      height: 100px;
+      width: 100%;
+    }
+
+    #footer {
+      background-color: black;
+      height: 50px;
+      width: 100%;
+    }
+
+    #content {
+      text-align: center;
+      font-size: 24px;
+    }
+  </style>
 </head>
 <body>
-  <header class="red-header">
-    <h1 class="centered-text">Hello World</h1>
-  </header>
-  <footer class="black-footer">
-    <p class="centered-text">Footer Content</p>
-  </footer>
+  <div id="header"></div>
+  <div id="content">
+    <?php
+      if (isset($_GET['hello'])) {
+        echo $_GET['hello'];
+      } else {
+        echo "Hello World";
+      }
+    ?>
+  </div>
+  <div id="footer"></div>
 </body>
 </html>
-```
-
-CSS (styles.css):
-```css
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.red-header {
-  background-color: red;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.black-footer {
-  background-color: black;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.centered-text {
-  color: white;
-  text-align: center;
-}
-```
-
-PHP:
-```php
-<?php
-// No PHP code is required for this task
-```
