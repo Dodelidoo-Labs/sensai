@@ -3,44 +3,43 @@
 <head>
   <style>
     body {
-      margin: 0;
-      padding: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      margin: 0;
+      padding: 0;
     }
-
-    #header {
+    .header {
       background-color: red;
-      height: 100px;
+      padding: 10px;
       width: 100%;
+      text-align: left;
+      color: white;
     }
-
-    #footer {
+    .footer {
       background-color: black;
-      height: 50px;
+      padding: 10px;
       width: 100%;
-    }
-
-    #content {
       text-align: center;
+      color: white;
+    }
+    .content {
       font-size: 24px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div id="header"></div>
-  <div id="content">
-    <?php
-      if (isset($_GET['hello'])) {
-        echo $_GET['hello'];
-      } else {
-        echo "Hello World";
-      }
-    ?>
+  <div class="header">
+    logo
   </div>
-  <div id="footer"></div>
+  <div class="content">
+    Hello World
+  </div>
+  <div class="footer">
+    © Sensai 2023
+  </div>
 </body>
 </html>
