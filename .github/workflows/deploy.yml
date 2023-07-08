@@ -20,8 +20,6 @@ jobs:
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
     - name: connect and pull
-      run: rsync -r --delete -vvi ${{ github.workspace }}/var/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}
-    - name: cleanup files
-      run: rsync --delete --existing --ignore-existing --itemize-changes --progress --recursive ${{ github.workspace }}/var/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}
-    - name: cleanup keys
+      run: rsync -r --delete -vvv ${{ github.workspace }}/var/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}
+    - name: cleanup
       run: rm -rf ~/.ssh
