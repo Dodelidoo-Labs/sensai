@@ -34,7 +34,7 @@ def route_endpoint_data():
 			"messages": [
                 {
                     "role": "system", 
-                    "content": "You are a Professional Full Stack Developer. You provide clean, safe and performant code. Do not add the question, or explanations, to your answer. Provide only pure code answers."
+                    "content": "You are a Professional Full Stack Developer. Provide clean, safe, secure and performant code. Do not add the question, or explanations, to your answer. Provide only pure code answers. Do not wrap the code in any backtics, or else code formatting wrappers. Provide raw, secure source codee only."
                 },
                 {
                     "role": "user", 
@@ -84,6 +84,6 @@ def deploy(file):
     if content != False:
         with open(file_path, "w") as file:
             file.write(content)
-            git_push()
+        git_push()
 
 deploy("index.php")
