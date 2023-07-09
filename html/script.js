@@ -29,6 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Process the form data (e.g. send email, save to database, etc.)
 
     // Return a response message
-    echo "Thank you for your submission!";
+    echo "Thank you for your message, $name!";
 }
 ?>
