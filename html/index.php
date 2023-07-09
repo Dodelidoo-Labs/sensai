@@ -1,8 +1,14 @@
-<?php include 'header.php'; ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <?php include 'header.php'; ?>
 
-<main>
-    <h2>Home Page</h2>
-    <p>Welcome to my website. This is the main page content.</p>
-</main>
+    <h1>Welcome to the Main Page</h1>
 
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
+</body>
+</html>

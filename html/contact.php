@@ -1,8 +1,17 @@
-<?php include 'header.php'; ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <?php include 'header.php'; ?>
 
-<main>
-    <h2>Contact Page</h2>
-    <form id="contact-form" method="post" action="submit.php">
+    <h1>Contact Us</h1>
+
+    <form id="contactForm" method="post">
         <div>
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -19,6 +28,7 @@
             <input type="submit" value="Submit">
         </div>
     </form>
-</main>
 
-<?php include 'footer.php'; ?>
+    <?php include 'footer.php'; ?>
+</body>
+</html>
