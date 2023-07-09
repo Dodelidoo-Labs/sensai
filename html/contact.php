@@ -9,25 +9,22 @@
 <body>
     <?php include 'header.php'; ?>
 
-    <h1>Contact Us</h1>
+    <h1>Contact Page</h1>
 
-    <form id="contactForm" method="post">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
-        <div>
-            <input type="submit" value="Submit">
-        </div>
+    <form id="contactForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea><br>
+
+        <input type="submit" value="Submit">
     </form>
+
+    <div id="response"></div>
 
     <?php include 'footer.php'; ?>
 </body>

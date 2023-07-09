@@ -1,3 +1,3 @@
 <footer>
-    <p>&copy; 2021 Your Website</p>
+    <p>Footer</p>
 </footer>
