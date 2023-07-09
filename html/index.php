@@ -1,5 +1,7 @@
 <?php include 'header.php'; ?>
 
-<!-- Content of the page goes here -->
+<main>
+    <!-- Main page content goes here -->
+</main>
 
 <?php include 'footer.php'; ?>

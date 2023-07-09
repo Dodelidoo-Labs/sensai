@@ -1,11 +1,12 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $message = $_POST['message'];
+// Handle form submission
+$name = $_POST['name'];
+$email = $_POST['email'];
+$message = $_POST['message'];
 
-    // Process the form submission here
+// Process form data and send email, save to database, etc.
 
-    echo 'Thank you for contacting us!';
-}
-?>
+// Return response
+$response = array('success' => true);
+header('Content-Type: application/json');
+echojson_encode($response);
