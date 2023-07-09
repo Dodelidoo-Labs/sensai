@@ -1,8 +1,8 @@
-<header>
-    <nav>
-        <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="contact.php">Contact</a></li>
-        </ul>
-    </nav>
-</header>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
