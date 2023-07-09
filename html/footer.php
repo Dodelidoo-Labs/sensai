@@ -1,3 +1,5 @@
-<footer>
-    <p>&copy; <?php echo date("Y"); ?> My Application. All rights reserved.</p>
-</footer>
+    <footer>
+        <p>&copy; <?php echo date("Y"); ?> My Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
