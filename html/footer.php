@@ -1,5 +1,3 @@
-    <footer>
-        <!-- Footer content goes here -->
-    </footer>
-</body>
-</html>
+<footer>
+    <script src="scripts.js"></script>
+</footer>
