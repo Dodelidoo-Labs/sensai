@@ -80,18 +80,17 @@ def deploy():
 		{"role": "user", "content": prompt + "### 1. Filename: filename ```code```"}
 	]
     content = get_response(messages, result='')
-    print(content)
     if content != False:
         files = re.findall(r'(\d+\. Filename:.*?)(?=\d+\. Filename:|$)', content, re.DOTALL)
-        print(files)
         for file in files:
             f_r = r'Filename:\s+(.*?)\n'
-            c_r = r'```[^\n]+\n(.*?)```'
+            c_r = r'```(\w+)\n([\s\S]*?)\n```'
             fname = re.search(f_r, file)
-            c = re.search(c_r, file, re.DOTALL)
+            cblocks = re.findall(c_r, file, re.DOTALL)
+            c = '\n'.join([block[1] for block in cblocks])
             if fname and c:
                 filename = fname.group(1)
-                code = c.group(1)
+                code = c
                 file_path = f"{wdir}/{filename}"
                 with open(file_path, "w") as u_file:
                     u_file.write(code)
