@@ -1,5 +1,4 @@
 <header>
-    <h1>My PHP Application</h1>
     <nav>
         <ul>
             <li><a href="index.php">Home</a></li>

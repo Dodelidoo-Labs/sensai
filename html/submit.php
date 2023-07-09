@@ -4,9 +4,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    // Process the form data (e.g. send email, save to database, etc.)
+    // Process the form submission here
 
-    // Return a response
-    echo 'success';
+    echo 'Thank you for contacting us!';
 }
 ?>

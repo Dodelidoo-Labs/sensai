@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('#contactForm').submit(function(event) {
-        event.preventDefault();
+    $('#contact-form').submit(function(e) {
+        e.preventDefault();
 
         var name = $('#name').val();
         var email = $('#email').val();
@@ -15,13 +15,8 @@ $(document).ready(function() {
                 message: message
             },
             success: function(response) {
-                alert('Form submitted successfully!');
-                $('#name').val('');
-                $('#email').val('');
-                $('#message').val('');
-            },
-            error: function(xhr, status, error) {
-                alert('An error occurred while submitting the form. Please try again.');
+                $('#response').html(response);
+                $('#contact-form')[0].reset();
             }
         });
     });
