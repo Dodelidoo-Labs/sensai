@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $('#contact-form').submit(function(e) {
-       ```javascript
         e.preventDefault(); // Prevent form submission
 
         var form = $(this);

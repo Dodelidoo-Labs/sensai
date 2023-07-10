@@ -76,8 +76,8 @@ def git_push():
 
 def deploy():
     messages = [
-		{"role": "system", "content": "You are a full stack developer. You do not wrap your code in markup, you do not use backticks or language syntax wrappers. you do not explain your response, you do not include the question in your response, you do not write a conclusion. you write only code."},
-		{"role": "user", "content": prompt + "### 1. Filename: filename ```code```"}
+		{"role": "system", "content": "You are a full stack developer. You do not explain your response, you do not include the question in your response, you do not write a conclusion. you write only code."},
+		{"role": "user", "content": prompt + " Respond with this format: 1. Filename: filename ```code```"}
 	]
     content = get_response(messages, result='')
     if content != False:
