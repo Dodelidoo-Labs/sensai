@@ -1,9 +1,8 @@
 import os
-import openai
 from dotenv import load_dotenv
 import subprocess
-import re
-
+import json
+import openai
 
 # Ask for a prompt
 prompt = input("Enter prompt:" )
@@ -21,52 +20,69 @@ pres = float(os.getenv("PRES_PENALTY"))
 openai.api_key = os.getenv("TOKEN")
 wdir = os.getenv("WORKING_DIR")
 
-def get_response(messages,result):
-    if model.startswith("gpt-"):
-        try:
-            response = openai.ChatCompletion.create(
-				model=model,
-				messages=messages,
-				temperature=temp,
-				max_tokens=max_tokens,
-				top_p=top_p,
-				frequency_penalty=freq,
-				presence_penalty=pres,
-                stop=["###"]
-			)
-            last_result = response['choices'][0]['message']['content']
-            result += last_result
-            stop = response['choices'][0]['finish_reason']
-            if (str(stop) == "stop"):
-                return result
-            if str(stop) == "length":
-                new_messages = [
-					{"role": "assistant", "content": last_result},
-					{"role": "user", "content": "continue"}
-				]
-                messages.extend(new_messages)
-                result = get_response(messages, result)
-                return result
-            else:
-                return False
+system_message = "You are a full stack developer. You write complete code. You always include all necessary styles and scripts. You write safe, validated and performant code. You do not return a description or an explanation. You do not include any formatting or backticks. Your response must be valid JSON array. Example Response: [{\"filename\":\"filename.extension\",\"content\":\"code\"},{\"filename\":\"another-file.extension\",\"content\":\"code\"}]."
+messages = [
+	{"role": "system", "content": system_message},
+	{"role": "user", "content": prompt}
+]
 
-        except Exception as e:
-            result, stop = f'Request failed with an exception', {e}
-    else:
-        try:
-            response = openai.Completion.create(
-				model=model,
-				prompt=prompt,
-				temperature=temp,
-				max_tokens=max_tokens,
-				top_p=top_p,
-				frequency_penalty=freq,
-				presence_penalty=pres,
-				stop=["###"]
-			)
-            result, stop = response['choices'][0]['text'], response['choices'][0]['finish_reason']
-        except Exception as e:
-            result = f'Request failed with exception {e}'
+def get_gpt_response(messages, result):
+    try:
+        response = openai.ChatCompletion.create(
+			model=model,
+			messages=messages,
+			temperature=temp,
+			max_tokens=max_tokens,
+			top_p=top_p,
+			frequency_penalty=freq,
+			presence_penalty=pres,
+		)
+        last_result = response['choices'][0]['message']['content']
+        result += last_result
+        stop = response['choices'][0]['finish_reason']
+        if (str(stop) == "stop"):
+            return result
+        if str(stop) == "length":
+            new_messages = [
+				{"role": "assistant", "content": last_result},
+				{"role": "user", "content": "Continue." + system_message}
+			]
+            messages.extend(new_messages)
+            result = get_gpt_response(messages, result)
+            return result
+        else:
+            return False
+
+    except Exception as e:
+        result, stop = "Request failed with an exception", {e}
+        print( result, stop)
+        return False
+
+def get_legacy_response(prompt, result):
+    try:
+        response = openai.Completion.create(
+			model=model,
+			prompt=prompt,
+			temperature=temp,
+			max_tokens=max_tokens,
+			top_p=top_p,
+			frequency_penalty=freq,
+			presence_penalty=pres,
+		)
+        last_result = response['choices'][0]['text']
+        result += last_result
+        stop = response['choices'][0]['finish_reason']
+        if (str(stop) == "stop"):
+            return result
+        if str(stop) == "length":
+            result = get_legacy_response(last_result, result)
+            return result
+        else:
+            return False
+    except Exception as e:
+        result = f'Request failed with exception {e}'
+        print( result, stop)
+        return False
 
 def git_push():
     os.chdir(wdir)
@@ -75,25 +91,21 @@ def git_push():
     subprocess.run(["git", "push", "origin", "main"])
 
 def deploy():
-    messages = [
-		{"role": "system", "content": "You are a full stack developer. You do not explain your response, you do not include the question in your response, you do not write a conclusion. you write only code."},
-		{"role": "user", "content": prompt + " Respond with this format: 1. Filename: filename ```code```"}
-	]
-    content = get_response(messages, result='')
+    if model.startswith("gpt-"):
+        content = get_gpt_response(messages, result='')
+    else:
+        prompt = system_message + " " + prompt
+        content = get_legacy_response(prompt, result='') 
+    data = json.loads(content)
     if content != False:
-        files = re.findall(r'(\d+\. Filename:.*?)(?=\d+\. Filename:|$)', content, re.DOTALL)
-        for file in files:
-            f_r = r'Filename:\s+(.*?)\n'
-            c_r = r'```(\w+)\n([\s\S]*?)\n```'
-            fname = re.search(f_r, file)
-            cblocks = re.findall(c_r, file, re.DOTALL)
-            c = '\n'.join([block[1] for block in cblocks])
-            if fname and c:
-                filename = fname.group(1)
-                code = c
+        
+        for item in data:
+            filename = item["filename"]
+            content = item["content"]
+            if filename and content:
                 file_path = f"{wdir}/{filename}"
                 with open(file_path, "w") as u_file:
-                    u_file.write(code)
+                    u_file.write(content)
         git_push()
 
 deploy()
