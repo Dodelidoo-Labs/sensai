@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My PHP Application</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Main Page</title>
 </head>
 <body>
     <?php include 'header.php'; ?>
-
-    <h1>Welcome to my PHP Application</h1>
-
+    
+    <h1>Welcome to the Main Page</h1>
+    
     <?php include 'footer.php'; ?>
 </body>
 </html>
