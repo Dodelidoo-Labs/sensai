@@ -1,3 +1,5 @@
 <footer>
-    <p>Footer</p>
+  &copy; 2022 My Website
 </footer>
+</body>
+</html>
