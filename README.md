@@ -7,13 +7,14 @@ In this POC, a chained solution is presented between GPT, GitHub, and Selenium.
 
 ## Features
 
-- Generate code using GPT models based on a prompt
-- Deploy generated code to a server using automatically, using Git actions
-- Run the implementation with a Selenium instance
-- Perform visual inspections using computer vision
-- Inspect debug logs for troubleshooting
-- Loop until the desired implementation is complete and working
-- Finetune GPT Model with eventual optimizations extracted from the previous processes, to be used in the next loop
+[*] Generate code using GPT models based on a prompt
+[*] Create necessary files with correct names and write generated code to them
+[*] Deploy generated code to a server using automatically, using Git actions
+[ ] Run the implementation with a Selenium instance
+[ ] Perform visual inspections using computer vision
+[ ] Inspect debug logs for troubleshooting
+[ ] Loop until the desired implementation is complete and working
+[ ] Finetune GPT Model with eventual optimizations extracted from the previous processes, to be used in the next loop
 
 ## Requirements
 
