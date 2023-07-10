@@ -50,6 +50,20 @@ You also need your own GitHub Repository with an action defined to deploy to you
 
 4. Download and configure the necessary web driver for Selenium. Please refer to the official Selenium documentation for specific instructions on setting up the web driver for your preferred browser.
 
+5. Make sure to have an `.env` file in the `app` directory with these contents (complete where necessary):
+
+```
+TOKEN=
+BASE_URL=https://api.openai.com/v1
+MODEL=gpt-3.5-turbo
+MAX_TOKENS=1000
+TEMPERATURE=0
+FREQ_PENALTY=0
+PRES_PENALTY=0
+TOP_P=1.0
+WORKING_DIR=
+```
+
 ## Usage
 
 0. Edit the variables in the `sensai/app/.env` file adequately
