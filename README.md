@@ -66,7 +66,7 @@ WORKING_DIR=
 
 ## Usage
 
-0. Edit the variables in the `sensai/app/.env` file adequately
+0. Edit the variables in the `sensai/app/.env` file adequately, see above point 5
 
 1. Run the app:
 
